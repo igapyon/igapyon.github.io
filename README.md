@@ -1,4 +1,4 @@
-# いがぴょんの github ページ
+# Igapyon's github page
 
 [target](https://igapyon.github.io/) 
 / [source](https://github.com/igapyon/igapyon.github.io)
@@ -12,7 +12,7 @@
 * blanco Framework
 * Benten
 
-## 日記系統
+## Diary
 
 * [いがぴょんの日記v3](https://igapyon.github.io/diary/)
 
