@@ -7,12 +7,12 @@
 
 * [https://github.com/igapyon](https://github.com/igapyon)
 
+## Diary
+
+* [いがぴょんの日記v3](https://igapyon.github.io/diary/)
+
 ## OSS
 
 * blanco Framework
 * Benten
-
-## Diary
-
-* [いがぴょんの日記v3](https://igapyon.github.io/diary/)
 
