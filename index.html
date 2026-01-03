@@ -3,22 +3,21 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>igapyon.github.io</title>
-  <meta name="description" content="igapyon.github.io トップページ。日記とGitHubへのリンク。" />
-  <!-- Tailwind CSS Play CDN -->
+  <title>Igapyon</title>
+  <meta name="description" content="igapyon について。日記と GitHub などへのリンク。" />
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body class="min-h-screen bg-white text-slate-900">
-  <main class="mx-auto flex min-h-screen max-w-2xl flex-col items-center justify-center px-6 py-20 text-center">
+  <main class="flex min-h-screen w-full flex-col items-center justify-center px-6 py-20 text-center">
     <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl">
-      igapyon.github.io
+      igapyon
     </h1>
     <p class="mt-3 text-slate-600">
       いがぴょんの個人サイトの index
     </p>
 
-    <div class="mt-10 w-full space-y-3">
+    <div class="mt-10 w-full max-w-2xl space-y-3">
       <!-- Diary -->
       <a
         href="https://www.igapyon.jp/igapyon/diary/"
@@ -102,7 +101,7 @@
 
     <section class="mt-12 w-full text-left">
       <h2 class="text-lg font-semibold text-slate-800">最近のOSS作品</h2>
-      <ul class="mt-4 space-y-3">
+      <ul class="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
         <li>
           <a
             href="https://igapyon.github.io/AnalogClocket/"
