@@ -5,304 +5,348 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Igapyon</title>
   <meta name="description" content="igapyon について。日記と GitHub などへのリンク。" />
-  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      color-scheme: light;
+      --md-sys-color-primary: #6750A4;
+      --md-sys-color-on-primary: #FFFFFF;
+      --md-sys-color-primary-container: #EADDFF;
+      --md-sys-color-on-primary-container: #21005D;
+      --md-sys-color-secondary: #625B71;
+      --md-sys-color-on-secondary: #FFFFFF;
+      --md-sys-color-secondary-container: #E8DEF8;
+      --md-sys-color-on-secondary-container: #1D192B;
+      --md-sys-color-surface: #FFFBFE;
+      --md-sys-color-surface-variant: #E7E0EC;
+      --md-sys-color-on-surface: #1C1B1F;
+      --md-sys-color-on-surface-variant: #49454F;
+      --md-sys-color-outline: #CAC4D0;
+      --md-sys-color-outline-variant: #E7E0EC;
+      --md-sys-shadow-1: 0 1px 2px rgba(0, 0, 0, 0.18), 0 1px 3px rgba(0, 0, 0, 0.12);
+      --md-sys-shadow-2: 0 4px 12px rgba(0, 0, 0, 0.14);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Segoe UI", "Helvetica Neue", "Noto Sans JP", "Hiragino Sans", sans-serif;
+      background: #F7F2FA;
+      color: var(--md-sys-color-on-surface);
+      min-height: 100vh;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 64px 24px 72px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 32px 24px;
+      background: var(--md-sys-color-primary-container);
+      color: var(--md-sys-color-on-primary-container);
+      border-radius: 24px;
+      box-shadow: var(--md-sys-shadow-1);
+    }
+    .hero-title {
+      font-size: 2.4rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+    .hero-subtitle {
+      margin-top: 12px;
+      font-size: 1rem;
+      color: #4A4458;
+    }
+
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--md-sys-color-on-surface-variant);
+      margin-bottom: 12px;
+    }
+
+    .link-stack {
+      display: grid;
+      gap: 14px;
+    }
+
+    .md-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      background: var(--md-sys-color-surface);
+      border-radius: 18px;
+      padding: 18px 20px;
+      border: 1px solid var(--md-sys-color-outline-variant);
+      box-shadow: var(--md-sys-shadow-1);
+      transition: box-shadow 160ms ease, transform 160ms ease, border-color 160ms ease;
+    }
+    .md-card:hover {
+      box-shadow: var(--md-sys-shadow-2);
+      border-color: var(--md-sys-color-outline);
+      transform: translateY(-1px);
+    }
+
+    .md-card-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+    .md-card-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+    }
+    .md-card-subtitle {
+      font-size: 0.9rem;
+      color: var(--md-sys-color-on-surface-variant);
+      margin-top: 6px;
+      line-height: 1.5;
+    }
+
+    .md-icon {
+      width: 28px;
+      height: 28px;
+      flex-shrink: 0;
+    }
+
+    .md-chevron {
+      font-size: 1.2rem;
+      color: var(--md-sys-color-on-surface-variant);
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--md-sys-color-surface-variant);
+    }
+
+    .oss-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+    }
+
+    .footer {
+      font-size: 0.8rem;
+      color: var(--md-sys-color-on-surface-variant);
+      margin-top: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .md-footer-links {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: var(--md-sys-color-surface-variant);
+    }
+    .md-footer-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 600;
+      color: #4A4458;
+    }
+    .md-footer-icon {
+      width: 16px;
+      height: 16px;
+    }
+
+    @media (max-width: 720px) {
+      .hero { padding: 28px 18px; }
+      .hero-title { font-size: 2rem; }
+      .md-card { flex-direction: column; align-items: flex-start; }
+      .md-chevron { align-self: flex-end; }
+    }
+  </style>
 </head>
 
-<body class="min-h-screen bg-white text-slate-900">
-  <main class="flex min-h-screen w-full flex-col items-center justify-center px-6 py-20 text-center">
-    <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl">
-      igapyon
-    </h1>
-    <p class="mt-3 text-slate-600">
-      いがぴょんの個人サイトの index
-    </p>
-
-    <div class="mt-10 w-full max-w-2xl space-y-3">
-      <!-- Diary -->
-      <a
-        href="https://www.igapyon.jp/igapyon/diary/"
-        class="group flex w-full items-center justify-between rounded-2xl border border-slate-200 bg-white px-5 py-4 text-left shadow-sm transition hover:border-slate-300 hover:shadow"
-      >
-        <span class="flex items-center gap-3">
-          <svg xmlns="http://www.w3.org/2000/svg"
-               viewBox="0 0 24 24"
-               fill="currentColor"
-               class="h-6 w-6 text-sky-500">
-            <path d="M5.625 1.5A2.625 2.625 0 003 4.125v15.75A2.625 2.625 0 005.625 22.5h12.75A2.625 2.625 0 0021 19.875V7.875a2.625 2.625 0 00-.77-1.855l-3.25-3.25A2.625 2.625 0 0015.125 2.25H5.625z"/>
-            <path fill="#ffffff"
-                  d="M7.5 9h9v1.5h-9V9zm0 3h9v1.5h-9V12zm0 3h6v1.5h-6V15z"/>
-          </svg>
-          <span class="text-lg font-medium">日記</span>
-        </span>
-        <span class="text-slate-400 transition group-hover:translate-x-0.5">→</span>
-      </a>
-
-      <!-- GitHub -->
-      <a
-        href="https://github.com/igapyon"
-        class="group flex w-full items-center justify-between rounded-2xl border border-slate-200 bg-white px-5 py-4 text-left shadow-sm transition hover:border-slate-300 hover:shadow"
-      >
-        <span class="flex items-center gap-3">
-          <svg role="img"
-               viewBox="0 0 24 24"
-               xmlns="http://www.w3.org/2000/svg"
-               class="h-6 w-6 text-slate-800">
-            <title>GitHub</title>
-            <path d="M12 .297c-6.63 0-12 5.373-12 12
-                     0 5.303 3.438 9.8 8.205 11.385
-                     .6.113.82-.258.82-.577
-                     0-.285-.01-1.04-.015-2.04
-                     -3.338.724-4.042-1.61-4.042-1.61
-                     -.546-1.387-1.333-1.757-1.333-1.757
-                     -1.089-.745.084-.729.084-.729
-                     1.205.084 1.838 1.236 1.838 1.236
-                     1.07 1.835 2.809 1.305 3.495.998
-                     .108-.776.417-1.305.76-1.605
-                     -2.665-.3-5.466-1.332-5.466-5.93
-                     0-1.31.469-2.381 1.236-3.221
-                     -.123-.303-.536-1.524.117-3.176
-                     0 0 1.008-.322 3.301 1.23
-                     .957-.266 1.983-.399 3.003-.404
-                     1.02.005 2.047.138 3.006.404
-                     2.291-1.552 3.297-1.23 3.297-1.23
-                     .655 1.653.242 2.874.12 3.176
-                     .77.84 1.235 1.911 1.235 3.221
-                     0 4.61-2.807 5.625-5.479 5.921
-                     .43.372.823 1.102.823 2.222
-                     0 1.606-.014 2.896-.014 3.286
-                     0 .319.216.694.825.576
-                     C20.565 22.092 24 17.592 24 12
-                     24 5.67 18.627.297 12 .297z"/>
-          </svg>
-          <span class="text-lg font-medium">GitHub</span>
-        </span>
-        <span class="text-slate-400 transition group-hover:translate-x-0.5">→</span>
-      </a>
-
-      <!-- Instagram -->
-      <a
-        href="https://www.instagram.com/toshikiiga/"
-        class="group flex w-full items-center justify-between rounded-2xl border border-slate-200 bg-white px-5 py-4 text-left shadow-sm transition hover:border-slate-300 hover:shadow"
-      >
-        <span class="flex items-center gap-3">
-          <svg role="img"
-               viewBox="0 0 24 24"
-               xmlns="http://www.w3.org/2000/svg"
-               fill="currentColor"
-               class="h-6 w-6 text-pink-500">
-            <title>Instagram</title>
-            <path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 1.5A4.25 4.25 0 003.5 7.75v8.5A4.25 4.25 0 007.75 20.5h8.5a4.25 4.25 0 004.25-4.25v-8.5A4.25 4.25 0 0016.25 3.5h-8.5zM12 7a5 5 0 110 10 5 5 0 010-10zm0 1.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7zm5.25-.75a.75.75 0 110 1.5.75.75 0 010-1.5z"/>
-          </svg>
-          <span class="text-lg font-medium">Instagram</span>
-        </span>
-        <span class="text-slate-400 transition group-hover:translate-x-0.5">→</span>
-      </a>
-    </div>
-
-    <section class="mt-12 w-full text-left">
-      <h2 class="text-lg font-semibold text-slate-800">最近のOSS作品（実験的なものを含む）</h2>
-      <ul class="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        <li>
-          <a
-            href="https://igapyon.github.io/local-html-tools/"
-            class="group block rounded-2xl border border-slate-200 bg-white px-5 py-4 shadow-sm transition hover:border-slate-300 hover:shadow"
-          >
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-3">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  class="h-5 w-5 text-orange-500"
-                >
-                  <path d="M5.5 2A1.5 1.5 0 004 3.5v2h2V4h12v1.5h2V3.5A1.5 1.5 0 0018.5 2h-13zm0 2h13a1.5 1.5 0 011.5 1.5v14a1.5 1.5 0 01-1.5 1.5h-13A1.5 1.5 0 014 19.5v-14A1.5 1.5 0 015.5 4zm1 3a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm6 0a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm6 0a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm-12 5a.75.75 0 100 1.5.75.75 0 000-1.5zm6 0a.75.75 0 100 1.5.75.75 0 000-1.5zm6 0a.75.75 0 100 1.5.75.75 0 000-1.5z"/>
-                </svg>
-                <p class="text-base font-medium">local-html-tools</p>
-              </div>
-              <span class="text-slate-400 transition group-hover:translate-x-0.5">→</span>
-            </div>
-            <p class="mt-2 hidden text-sm text-slate-600 group-hover:block">
-              ローカル完結のブラウザツール集。サーバ不要で、単一HTMLのStatic Web Appで動作します。入力すると自動的に結果が生成されます。
-            </p>
-          </a>
-        </li>
-        <li>
-          <a
-            href="https://igapyon.github.io/starship-sim/"
-            class="group block rounded-2xl border border-slate-200 bg-white px-5 py-4 shadow-sm transition hover:border-slate-300 hover:shadow"
-          >
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-3">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  class="h-5 w-5 text-cyan-500"
-                >
-                  <path d="M12 2.25l2.1 4.26 4.7.68-3.4 3.31.8 4.68L12 12.94 7.8 15.18l.8-4.68-3.4-3.31 4.7-.68L12 2.25z"/>
-                </svg>
-                <p class="text-base font-medium">starship-sim</p>
-              </div>
-              <span class="text-slate-400 transition group-hover:translate-x-0.5">→</span>
-            </div>
-            <p class="mt-2 hidden text-sm text-slate-600 group-hover:block">
-              単一HTMLで動く2次元宇宙戦闘シミュレーション。Vanilla JSのみで、物理演算・モジュラー艦設計・決定論的AI・5種類のテストシーンを搭載。
-            </p>
-          </a>
-        </li>
-        <li>
-          <a
-            href="apps/klondike.html"
-            class="group block rounded-2xl border border-slate-200 bg-white px-5 py-4 shadow-sm transition hover:border-slate-300 hover:shadow"
-          >
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-3">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  class="h-5 w-5 text-rose-500"
-                >
-                  <path d="M11.645 20.91a.75.75 0 01-.73-.59l-1.28-5.8-5.05-1.55a.75.75 0 010-1.44l5.05-1.55 1.28-5.8a.75.75 0 011.46 0l1.28 5.8 5.05 1.55a.75.75 0 010 1.44l-5.05 1.55-1.28 5.8a.75.75 0 01-.73.59z"/>
-                </svg>
-                <p class="text-base font-medium">Klondike</p>
-              </div>
-              <span class="text-slate-400 transition group-hover:translate-x-0.5">→</span>
-            </div>
-            <p class="mt-2 hidden text-sm text-slate-600 group-hover:block">
-              ブラウザで遊べるクロンダイク（ソリティア）。単一HTMLで完結する静的Webアプリ。
-            </p>
-          </a>
-        </li>
-        <li>
-          <a
-            href="https://igapyon.github.io/AnalogClocket/"
-            class="group block rounded-2xl border border-slate-200 bg-white px-5 py-4 shadow-sm transition hover:border-slate-300 hover:shadow"
-          >
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-3">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  class="h-5 w-5 text-sky-500"
-                >
-                  <path d="M12 1.5a10.5 10.5 0 100 21 10.5 10.5 0 000-21zM12 4.5a.75.75 0 01.75.75v6.19l3.47 2.08a.75.75 0 11-.77 1.29l-3.85-2.31a.75.75 0 01-.35-.64V5.25A.75.75 0 0112 4.5z"/>
-                </svg>
-                <p class="text-base font-medium">AnalogClocket</p>
-              </div>
-              <span class="text-slate-400 transition group-hover:translate-x-0.5">→</span>
-            </div>
-            <p class="mt-2 hidden text-sm text-slate-600 group-hover:block">
-              シンプルで実用的なアナログ時計の Static Web App。単一の HTML ファイルだけで動作し、サーバーやビルド工程は不要。
-            </p>
-          </a>
-        </li>
-        <li>
-          <a
-            href="https://igapyon.github.io/sql-formatter/"
-            class="group block rounded-2xl border border-slate-200 bg-white px-5 py-4 shadow-sm transition hover:border-slate-300 hover:shadow"
-          >
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-3">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  class="h-5 w-5 text-purple-500"
-                >
-                  <path d="M3.75 3a.75.75 0 00-.75.75v16.5c0 .414.336.75.75.75h16.5a.75.75 0 00.75-.75V3.75a.75.75 0 00-.75-.75H3.75zM5.25 5.5h2v2h-2v-2zm3.5 0h2v2h-2v-2zm3.5 0h2v2h-2v-2zm3.5 0h2v2h-2v-2zM5.25 9.5h2v5h-2v-5zm3.5 0h2v5h-2v-5zm3.5 0h2v5h-2v-5zm3.5 0h2v5h-2v-5z"/>
-                </svg>
-                <p class="text-base font-medium">sql-formatter</p>
-              </div>
-              <span class="text-slate-400 transition group-hover:translate-x-0.5">→</span>
-            </div>
-            <p class="mt-2 hidden text-sm text-slate-600 group-hover:block">
-              SQLフォーマッタープロジェクト。SQLパーサーとフォーマッターの実装を進行中です。
-            </p>
-          </a>
-        </li>
-        <li>
-          <a
-            href="https://igapyon.github.io/svg-part-editor/"
-            class="group block rounded-2xl border border-slate-200 bg-white px-5 py-4 shadow-sm transition hover:border-slate-300 hover:shadow"
-          >
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-3">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  class="h-5 w-5 text-emerald-500"
-                >
-                  <path d="M3 5.25A2.25 2.25 0 015.25 3h7.5A2.25 2.25 0 0115 5.25v1.5a.75.75 0 11-1.5 0v-1.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 00-.75.75v7.5a.75.75 0 00.75.75h1.5a.75.75 0 110 1.5h-1.5A2.25 2.25 0 013 12.75v-7.5z"/>
-                  <path d="M12.75 9a2.25 2.25 0 012.25-2.25h4.5A2.25 2.25 0 0121.75 9v4.5a2.25 2.25 0 01-2.25 2.25h-4.5A2.25 2.25 0 0112.75 13.5V9zm2.25-.75a.75.75 0 00-.75.75v4.5c0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75V9a.75.75 0 00-.75-.75h-4.5z"/>
-                  <path d="M8 16.5a.75.75 0 01.75-.75h6.5a.75.75 0 110 1.5h-6.5A.75.75 0 018 16.5z"/>
-                </svg>
-                <p class="text-base font-medium">svg-part-editor</p>
-              </div>
-              <span class="text-slate-400 transition group-hover:translate-x-0.5">→</span>
-            </div>
-            <p class="mt-2 hidden text-sm text-slate-600 group-hover:block">
-              ミニマルなWebブラウザ向けSVGエディタ。ゆっくり製作中。
-            </p>
-          </a>
-        </li>
-        <li>
-          <a
-            href="https://github.com/igapyon/remindy"
-            class="group block rounded-2xl border border-slate-200 bg-white px-5 py-4 shadow-sm transition hover:border-slate-300 hover:shadow"
-          >
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-3">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  class="h-5 w-5 text-amber-500"
-                >
-                  <path d="M12 2.25a7.5 7.5 0 00-4.47 13.52c.2.14.32.37.32.62v2.36a.75.75 0 001.2.6l2.72-2.04a.75.75 0 01.45-.15h3.03a7.5 7.5 0 10-3.25-14.91z"/>
-                  <path d="M12 6.75a.75.75 0 01.75.75v3.25H16a.75.75 0 110 1.5h-4a.75.75 0 01-.75-.75V7.5a.75.75 0 01.75-.75z"/>
-                </svg>
-                <p class="text-base font-medium">Remindy</p>
-              </div>
-              <span class="text-slate-400 transition group-hover:translate-x-0.5">→</span>
-            </div>
-            <p class="mt-2 hidden text-sm text-slate-600 group-hover:block">
-              Windows 11向けのデスクトップ用リマインダーツール。Java（AWT）で構築。予定されているイベントなどを通知。
-            </p>
-          </a>
-        </li>
-        <li>
-          <a
-            href="https://github.com/igapyon/scheduly"
-            class="group block rounded-2xl border border-slate-200 bg-white px-5 py-4 shadow-sm transition hover:border-slate-300 hover:shadow"
-          >
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-3">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  class="h-5 w-5 text-indigo-500"
-                >
-                  <path d="M6.75 2.25a.75.75 0 01.75.75v1.5h9V3a.75.75 0 011.5 0v1.5h.75A2.25 2.25 0 0121 6.75v12A2.25 2.25 0 0118.75 21H5.25A2.25 2.25 0 013 18.75v-12A2.25 2.25 0 015.25 4.5H6V3a.75.75 0 01.75-.75zm-2.25 6v10.5c0 .414.336.75.75.75h13.5a.75.75 0 00.75-.75V8.25H4.5z"/>
-                  <path d="M7.5 12a.75.75 0 01.75-.75h2.5a.75.75 0 010 1.5h-2.5A.75.75 0 017.5 12zm0 3a.75.75 0 01.75-.75h6a.75.75 0 010 1.5h-6A.75.75 0 017.5 15z"/>
-                </svg>
-                <p class="text-base font-medium">Scheduly</p>
-              </div>
-              <span class="text-slate-400 transition group-hover:translate-x-0.5">→</span>
-            </div>
-            <p class="mt-2 hidden text-sm text-slate-600 group-hover:block">
-              iCalendar（ICS）と連携して日程候補の作成・共有・回答収集・配布を素早く行えるスケジュール調整アプリです。BETA公開中。
-            </p>
-          </a>
-        </li>
-      </ul>
+<body>
+  <main class="page">
+    <section class="hero">
+      <h1 class="hero-title">igapyon</h1>
+      <p class="hero-subtitle">いがぴょんの個人サイトの index</p>
     </section>
 
-    <footer class="mt-14 text-xs text-slate-400">
-      © Toshiki Iga
+    <section>
+      <h2 class="section-title">リンク</h2>
+      <div class="link-stack">
+        <a href="https://www.igapyon.jp/igapyon/diary/" class="md-card">
+          <div class="md-card-left">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="md-icon" style="color:#3B82F6">
+              <path d="M5.625 1.5A2.625 2.625 0 003 4.125v15.75A2.625 2.625 0 005.625 22.5h12.75A2.625 2.625 0 0021 19.875V7.875a2.625 2.625 0 00-.77-1.855l-3.25-3.25A2.625 2.625 0 0015.125 2.25H5.625z"/>
+              <path fill="#ffffff" d="M7.5 9h9v1.5h-9V9zm0 3h9v1.5h-9V12zm0 3h6v1.5h-6V15z"/>
+            </svg>
+            <div>
+              <div class="md-card-title">日記</div>
+              <div class="md-card-subtitle">日々の記録と技術メモ。</div>
+            </div>
+          </div>
+          <span class="md-chevron">→</span>
+        </a>
+
+        <a href="https://github.com/igapyon" class="md-card">
+          <div class="md-card-left">
+            <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="md-icon" style="color:#1F2937">
+              <title>GitHub</title>
+              <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385 .6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04 -3.338.724-4.042-1.61-4.042-1.61 -.546-1.387-1.333-1.757-1.333-1.757 -1.089-.745.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998 .108-.776.417-1.305.76-1.605 -2.665-.3-5.466-1.332-5.466-5.93 0-1.31.469-2.381 1.236-3.221 -.123-.303-.536-1.524.117-3.176 0 0 1.008-.322 3.301 1.23 .957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23 .655 1.653.242 2.874.12 3.176 .77.84 1.235 1.911 1.235 3.221 0 4.61-2.807 5.625-5.479 5.921 .43.372.823 1.102.823 2.222 0 1.606-.014 2.896-.014 3.286 0 .319.216.694.825.576 C20.565 22.092 24 17.592 24 12 24 5.67 18.627.297 12 .297z"/>
+            </svg>
+            <div>
+              <div class="md-card-title">GitHub</div>
+              <div class="md-card-subtitle">公開リポジトリ一覧。</div>
+            </div>
+          </div>
+          <span class="md-chevron">→</span>
+        </a>
+
+        <a href="https://www.instagram.com/toshikiiga/" class="md-card">
+          <div class="md-card-left">
+            <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="md-icon" style="color:#EC4899">
+              <title>Instagram</title>
+              <path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 1.5A4.25 4.25 0 003.5 7.75v8.5A4.25 4.25 0 007.75 20.5h8.5a4.25 4.25 0 004.25-4.25v-8.5A4.25 4.25 0 0016.25 3.5h-8.5zM12 7a5 5 0 110 10 5 5 0 010-10zm0 1.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7zm5.25-.75a.75.75 0 110 1.5.75.75 0 010-1.5z"/>
+            </svg>
+            <div>
+              <div class="md-card-title">Instagram</div>
+              <div class="md-card-subtitle">写真と日常の断片。</div>
+            </div>
+          </div>
+          <span class="md-chevron">→</span>
+        </a>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">最近のOSS作品（実験的なものを含む）</h2>
+      <div class="oss-grid">
+        <a href="https://igapyon.github.io/local-html-tools/" class="md-card">
+          <div class="md-card-left">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="md-icon" style="color:#F97316">
+              <path d="M5.5 2A1.5 1.5 0 004 3.5v2h2V4h12v1.5h2V3.5A1.5 1.5 0 0018.5 2h-13zm0 2h13a1.5 1.5 0 011.5 1.5v14a1.5 1.5 0 01-1.5 1.5h-13A1.5 1.5 0 014 19.5v-14A1.5 1.5 0 015.5 4zm1 3a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm6 0a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm6 0a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm-12 5a.75.75 0 100 1.5.75.75 0 000-1.5zm6 0a.75.75 0 100 1.5.75.75 0 000-1.5zm6 0a.75.75 0 100 1.5.75.75 0 000-1.5z"/>
+            </svg>
+            <div>
+              <div class="md-card-title">local-html-tools</div>
+              <div class="md-card-subtitle">ローカル完結のブラウザツール集。単一HTMLのStatic Web Appで動作。</div>
+            </div>
+          </div>
+          <span class="md-chevron">→</span>
+        </a>
+
+        <a href="https://igapyon.github.io/starship-sim/" class="md-card">
+          <div class="md-card-left">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="md-icon" style="color:#22D3EE">
+              <path d="M12 2.25l2.1 4.26 4.7.68-3.4 3.31.8 4.68L12 12.94 7.8 15.18l.8-4.68-3.4-3.31 4.7-.68L12 2.25z"/>
+            </svg>
+            <div>
+              <div class="md-card-title">starship-sim</div>
+              <div class="md-card-subtitle">2次元宇宙戦闘シミュレーション。Vanilla JSのみで構築。</div>
+            </div>
+          </div>
+          <span class="md-chevron">→</span>
+        </a>
+
+        <a href="apps/klondike.html" class="md-card">
+          <div class="md-card-left">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="md-icon" style="color:#FB7185">
+              <path d="M11.645 20.91a.75.75 0 01-.73-.59l-1.28-5.8-5.05-1.55a.75.75 0 010-1.44l5.05-1.55 1.28-5.8a.75.75 0 011.46 0l1.28 5.8 5.05 1.55a.75.75 0 010 1.44l-5.05 1.55-1.28 5.8a.75.75 0 01-.73.59z"/>
+            </svg>
+            <div>
+              <div class="md-card-title">Klondike</div>
+              <div class="md-card-subtitle">ブラウザで遊べるクロンダイク（ソリティア）。</div>
+            </div>
+          </div>
+          <span class="md-chevron">→</span>
+        </a>
+
+        <a href="https://igapyon.github.io/AnalogClocket/" class="md-card">
+          <div class="md-card-left">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="md-icon" style="color:#38BDF8">
+              <path d="M12 1.5a10.5 10.5 0 100 21 10.5 10.5 0 000-21zM12 4.5a.75.75 0 01.75.75v6.19l3.47 2.08a.75.75 0 11-.77 1.29l-3.85-2.31a.75.75 0 01-.35-.64V5.25A.75.75 0 0112 4.5z"/>
+            </svg>
+            <div>
+              <div class="md-card-title">AnalogClocket</div>
+              <div class="md-card-subtitle">シンプルで実用的なアナログ時計のStatic Web App。</div>
+            </div>
+          </div>
+          <span class="md-chevron">→</span>
+        </a>
+
+        <a href="https://igapyon.github.io/sql-formatter/" class="md-card">
+          <div class="md-card-left">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="md-icon" style="color:#A855F7">
+              <path d="M3.75 3a.75.75 0 00-.75.75v16.5c0 .414.336.75.75.75h16.5a.75.75 0 00.75-.75V3.75a.75.75 0 00-.75-.75H3.75zM5.25 5.5h2v2h-2v-2zm3.5 0h2v2h-2v-2zm3.5 0h2v2h-2v-2zm3.5 0h2v2h-2v-2zM5.25 9.5h2v5h-2v-5zm3.5 0h2v5h-2v-5zm3.5 0h2v5h-2v-5zm3.5 0h2v5h-2v-5z"/>
+            </svg>
+            <div>
+              <div class="md-card-title">sql-formatter</div>
+              <div class="md-card-subtitle">SQLフォーマッタープロジェクト。実装を進行中。</div>
+            </div>
+          </div>
+          <span class="md-chevron">→</span>
+        </a>
+
+        <a href="https://igapyon.github.io/svg-part-editor/" class="md-card">
+          <div class="md-card-left">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="md-icon" style="color:#10B981">
+              <path d="M3 5.25A2.25 2.25 0 015.25 3h7.5A2.25 2.25 0 0115 5.25v1.5a.75.75 0 11-1.5 0v-1.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 00-.75.75v7.5a.75.75 0 00.75.75h1.5a.75.75 0 110 1.5h-1.5A2.25 2.25 0 013 12.75v-7.5z"/>
+              <path d="M12.75 9a2.25 2.25 0 012.25-2.25h4.5A2.25 2.25 0 0121.75 9v4.5a2.25 2.25 0 01-2.25 2.25h-4.5A2.25 2.25 0 0112.75 13.5V9zm2.25-.75a.75.75 0 00-.75.75v4.5c0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75V9a.75.75 0 00-.75-.75h-4.5z"/>
+              <path d="M8 16.5a.75.75 0 01.75-.75h6.5a.75.75 0 110 1.5h-6.5A.75.75 0 018 16.5z"/>
+            </svg>
+            <div>
+              <div class="md-card-title">svg-part-editor</div>
+              <div class="md-card-subtitle">ミニマルなWebブラウザ向けSVGエディタ。ゆっくり製作中。</div>
+            </div>
+          </div>
+          <span class="md-chevron">→</span>
+        </a>
+
+        <a href="https://github.com/igapyon/remindy" class="md-card">
+          <div class="md-card-left">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="md-icon" style="color:#F59E0B">
+              <path d="M12 2.25a7.5 7.5 0 00-4.47 13.52c.2.14.32.37.32.62v2.36a.75.75 0 001.2.6l2.72-2.04a.75.75 0 01.45-.15h3.03a7.5 7.5 0 10-3.25-14.91z"/>
+              <path d="M12 6.75a.75.75 0 01.75.75v3.25H16a.75.75 0 110 1.5h-4a.75.75 0 01-.75-.75V7.5a.75.75 0 01.75-.75z"/>
+            </svg>
+            <div>
+              <div class="md-card-title">Remindy</div>
+              <div class="md-card-subtitle">Windows 11向けのデスクトップ用リマインダーツール。</div>
+            </div>
+          </div>
+          <span class="md-chevron">→</span>
+        </a>
+
+        <a href="https://github.com/igapyon/scheduly" class="md-card">
+          <div class="md-card-left">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="md-icon" style="color:#6366F1">
+              <path d="M6.75 2.25a.75.75 0 01.75.75v1.5h9V3a.75.75 0 011.5 0v1.5h.75A2.25 2.25 0 0121 6.75v12A2.25 2.25 0 0118.75 21H5.25A2.25 2.25 0 013 18.75v-12A2.25 2.25 0 015.25 4.5H6V3a.75.75 0 01.75-.75zm-2.25 6v10.5c0 .414.336.75.75.75h13.5a.75.75 0 00.75-.75V8.25H4.5z"/>
+              <path d="M7.5 12a.75.75 0 01.75-.75h2.5a.75.75 0 010 1.5h-2.5A.75.75 0 017.5 12zm0 3a.75.75 0 01.75-.75h6a.75.75 0 010 1.5h-6A.75.75 0 017.5 15z"/>
+            </svg>
+            <div>
+              <div class="md-card-title">Scheduly</div>
+              <div class="md-card-subtitle">iCalendar連携のスケジュール調整アプリ。BETA公開中。</div>
+            </div>
+          </div>
+          <span class="md-chevron">→</span>
+        </a>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="md-footer-links">
+        <a href="https://github.com/igapyon/igapyon.github.io/" class="md-footer-link" target="_blank" rel="noopener noreferrer">
+          <svg aria-hidden="true" viewBox="0 0 16 16" class="md-footer-icon" fill="currentColor">
+            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/>
+          </svg>
+          <span>GitHub</span>
+        </a>
+      </div>
+      <div>© Toshiki Iga</div>
     </footer>
   </main>
 </body>
