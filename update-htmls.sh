@@ -3,5 +3,4 @@ wget -O update-htmls.sh https://raw.githubusercontent.com/igapyon/igapyon.github
 wget -O index.html https://raw.githubusercontent.com/igapyon/igapyon.github.io/devel/index.html
 
 cd ./apps
-wget -O klondike.html https://raw.githubusercontent.com/igapyon/klondike/devel/index.html
-
+wget -O klondike.html https://raw.githubusercontent.com/igapyon/klondike/devel/klondike.html
